@@ -1,31 +1,34 @@
-import { Switch, Route, Link } from "react-router-dom";
+import { Switch, Route, Link, useRouteMatch } from "react-router-dom";
 
 export function Users() {
+  const { path, url } = useRouteMatch();
   return (
     <div>
-      <h2>Users</h2>
+      <h2>
+        Users {url} {path}
+      </h2>
 
       <ul>
         <li>
-          <Link to="/users/1">user 1</Link>
+          <Link to={`${url}/all`}>user all</Link>
         </li>
         <li>
-          <Link to="/users/2">user 2</Link>
+          <Link to={`${url}/pass`}>user passed</Link>
         </li>
         <li>
-          <Link to="/users/3">user 3</Link>
+          <Link to={`${url}/deny`}>user denied</Link>
         </li>
       </ul>
 
       <Switch>
-        <Route path="/users/1">
-          <User id="1" />
+        <Route path="/users/all">
+          <User id="all" />
         </Route>
-        <Route path="/users/2">
-          <User id="2" />
+        <Route path={`${path}/pass`}>
+          <User id="passed" />
         </Route>
-        <Route path="/users/3">
-          <User id="3" />
+        <Route path="/users/deny">
+          <User id="denied" />
         </Route>
       </Switch>
     </div>
